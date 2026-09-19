@@ -1,0 +1,37 @@
+{
+  "tested_utc": "2026-09-19T19:18:09.519158+00:00",
+  "tested_from": "streamdeck/bridge",
+  "python": {
+    "version": "3.12.14",
+    "api": 10,
+    "canvas_transport": 7,
+    "installer": 12,
+    "media": 3,
+    "total": 32,
+    "passed": true
+  },
+  "javascript": {
+    "signalrgb_client": 16,
+    "native_layout": 5,
+    "native_pacing": 6,
+    "total": 27,
+    "passed": true
+  },
+  "powershell_syntax": [
+    "Start-Bridge.ps1",
+    "Stop-Bridge.ps1"
+  ],
+  "new_launcher_parameters": [
+    "Python",
+    "VenvDirectory"
+  ],
+  "launchers_executed": false,
+  "tests_total": 59,
+  "new_hardware_tests": false,
+  "copied_venv": false,
+  "exact_build_guard_byte_identical": true,
+  "engine_byte_identical": true,
+  "private_path_scan_passed": true,
+  "live_session_token_included": false,
+  "notes": "Existing external test interpreter used; durable project environment prepared separately by coordinating agent."
+}

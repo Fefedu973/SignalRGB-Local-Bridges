@@ -1,0 +1,27 @@
+{
+  "observed_at": "2026-09-19T19:51:28+0200",
+  "status": {
+    "id": "signal-validation-readonly",
+    "ok": true,
+    "state": "streaming",
+    "writes": 369,
+    "last_colors": [
+      [
+        [
+          48,
+          0,
+          3
+        ],
+        [
+          48,
+          28,
+          0
+        ]
+      ],
+      100
+    ],
+    "restored_exact": null,
+    "error": null,
+    "lease_ms": 1922
+  }
+}

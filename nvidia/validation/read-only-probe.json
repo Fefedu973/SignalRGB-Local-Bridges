@@ -1,0 +1,65 @@
+{
+  "read_only": true,
+  "set_control_called": false,
+  "gpus": [
+    {
+      "pci_vendor": 4318,
+      "pci_device": 8712,
+      "subvendor": 4318,
+      "subdevice": 5429,
+      "revision": 161,
+      "name": "NVIDIA GeForce RTX 3080 Ti",
+      "control_version": 72012,
+      "flags": 0,
+      "zones": [
+        {
+          "index": 0,
+          "type": 3,
+          "mode": 0,
+          "manual_bytes": [
+            0,
+            0,
+            0,
+            0,
+            100,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "type": 4,
+          "mode": 0,
+          "manual_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "info_status": 0,
+      "zone_info": [
+        {
+          "index": 0,
+          "type": 3,
+          "device": 0,
+          "provider": 0,
+          "location": 8
+        },
+        {
+          "index": 1,
+          "type": 4,
+          "device": 1,
+          "provider": 0,
+          "location": 0
+        }
+      ]
+    }
+  ]
+}

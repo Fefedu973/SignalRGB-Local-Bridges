@@ -1,0 +1,13 @@
+**/.venv/
+**/__pycache__/
+*.pyc
+private-archives/
+local-installation/
+dist/
+*.local.json
+*.local.json.*
+*.log
+*.stop
+*.signal
+api-session.json
+launcher.json

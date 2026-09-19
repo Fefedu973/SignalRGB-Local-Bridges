@@ -1,0 +1,16 @@
+{
+  "tested_utc": "2026-09-19T19:40:05.1743372Z",
+  "purpose": "Shared runtime paths across packaged and ordinary Windows contexts",
+  "python_version": "3.13.2",
+  "python_tests": 35,
+  "javascript_tests": 27,
+  "powershell_version": "5.1",
+  "pure_runtime_path_assertions": 40,
+  "all_passed": true,
+  "launcher_bodies_executed": false,
+  "hardware_or_frida_access": false,
+  "environment_override": false,
+  "legacy_defaults_preserved": true,
+  "build_hash_allowlist_unchanged": true,
+  "native_core_unchanged": true
+}

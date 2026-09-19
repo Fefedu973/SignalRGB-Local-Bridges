@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "python": "%LOCALAPPDATA%\\Programs\\Python\\Python313\\python.exe",
+  "govee": {
+    "directory": "%USERPROFILE%\\Codespace\\Projects\\signalrgb-govee-direct-connect\\ble-companion",
+    "python": "%USERPROFILE%\\Codespace\\Projects\\signalrgb-govee-direct-connect\\.venv\\Scripts\\python.exe",
+    "config_file": "%USERPROFILE%\\Codespace\\Projects\\SignalRGB-Local-Bridges\\local-installation\\govee\\config.local.json"
+  },
+  "nvidia": {
+    "directory": "%USERPROFILE%\\Codespace\\Projects\\SignalRGB-Local-Bridges\\nvidia",
+    "runtime_directory": "%USERPROFILE%\\Codespace\\Projects\\SignalRGB-Local-Bridges\\local-installation\\nvidia"
+  },
+  "streamdeck": {
+    "directory": "%USERPROFILE%\\Codespace\\Projects\\SignalRGB-Local-Bridges\\streamdeck\\bridge",
+    "venv_directory": "%USERPROFILE%\\Codespace\\Projects\\SignalRGB-Local-Bridges\\streamdeck\\bridge\\.venv",
+    "plugin_directory": "",
+    "runtime_directory": "%USERPROFILE%\\Codespace\\Projects\\SignalRGB-Local-Bridges\\local-installation\\streamdeck",
+    "elgato_directory": "%ProgramFiles%\\Elgato\\StreamDeck"
+  }
+}

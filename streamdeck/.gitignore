@@ -1,0 +1,12 @@
+.venv/
+**/.venv/
+__pycache__/
+*.pyc
+api-session.json
+*.jsonl
+*.log
+*.lock
+*.stop
+runtime/
+signalrgb-backups/
+*.bak

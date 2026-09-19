@@ -1,0 +1,27 @@
+{
+  "observed_at": "2026-09-19T19:52:49+0200",
+  "status": {
+    "id": "post-0.1.1-readonly",
+    "ok": true,
+    "state": "streaming",
+    "writes": 925,
+    "last_colors": [
+      [
+        [
+          35,
+          35,
+          35
+        ],
+        [
+          35,
+          35,
+          35
+        ]
+      ],
+      100
+    ],
+    "restored_exact": null,
+    "error": null,
+    "lease_ms": 1562
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "seconds": 10.005530999998882,
+  "samples": [
+    {
+      "utc": "2026-09-19T19:41:11.525048+00:00",
+      "govee": [
+        {
+          "state": "streaming",
+          "ready": true,
+          "frame_writes": 2,
+          "error": null,
+          "restore_error": null
+        },
+        {
+          "state": "reconnecting",
+          "ready": false,
+          "frame_writes": 1,
+          "error": "",
+          "restore_error": null
+        },
+        {
+          "state": "streaming",
+          "ready": true,
+          "frame_writes": 2,
+          "error": null,
+          "restore_error": null
+        },
+        {
+          "state": "blackout",
+          "ready": true,
+          "frame_writes": 0,
+          "error": null,
+          "restore_error": null
+        }
+      ],
+      "nvidia": {
+        "state": "streaming",
+        "writes": 1,
+        "error": null,
+        "lease_ms": 1620
+      },
+      "streamdeck": {
+        "ready": true,
+        "errors": 0,
+        "painted_keys": 15,
+        "canvas_frames": 1151,
+        "rejected": 0,
+        "ack_fps_5s": 8.2
+      }
+    },
+    {
+      "utc": "2026-09-19T19:41:16.697927+00:00",
+      "govee": [
+        {
+          "state": "connecting",
+          "ready": false,
+          "frame_writes": 2,
+          "error": "",
+          "restore_error": null
+        },
+        {
+          "state": "streaming",
+          "ready": true,
+          "frame_writes": 2,
+          "error": null,
+          "restore_error": null
+        },
+        {
+          "state": "streaming",
+          "ready": true,
+          "frame_writes": 3,
+          "error": null,
+          "restore_error": null
+        },
+        {
+          "state": "blackout",
+          "ready": true,
+          "frame_writes": 0,
+          "error": null,
+          "restore_error": null
+        }
+      ],
+      "nvidia": {
+        "state": "streaming",
+        "writes": 1,
+        "error": null,
+        "lease_ms": 1653
+      },
+      "streamdeck": {
+        "ready": true,
+        "errors": 0,
+        "painted_keys": 15,
+        "canvas_frames": 1228,
+        "rejected": 0,
+        "ack_fps_5s": 15.2
+      }
+    },
+    {
+      "utc": "2026-09-19T19:41:21.093323+00:00",
+      "govee": [
+        {
+          "state": "streaming",
+          "ready": true,
+          "frame_writes": 3,
+          "error": null,
+          "restore_error": null
+        },
+        {
+          "state": "streaming",
+          "ready": true,
+          "frame_writes": 2,
+          "error": null,
+          "restore_error": null
+        },
+        {
+          "state": "streaming",
+          "ready": true,
+          "frame_writes": 3,
+          "error": null,
+          "restore_error": null
+        },
+        {
+          "state": "blackout",
+          "ready": true,
+          "frame_writes": 0,
+          "error": null,
+          "restore_error": null
+        }
+      ],
+      "nvidia": {
+        "state": "streaming",
+        "writes": 1,
+        "error": null,
+        "lease_ms": 1735
+      },
+      "streamdeck": {
+        "ready": true,
+        "errors": 0,
+        "painted_keys": 15,
+        "canvas_frames": 1295,
+        "rejected": 0,
+        "ack_fps_5s": 14
+      }
+    }
+  ]
+}

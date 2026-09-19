@@ -1,0 +1,150 @@
+{
+  "initial": {
+    "version": 72012,
+    "buffer_bytes": 6476,
+    "volatile_flags": 0,
+    "zones": [
+      {
+        "index": 0,
+        "type": "RGBW",
+        "mode": 0,
+        "rgbw_brightness": [
+          0,
+          0,
+          0,
+          0,
+          100
+        ]
+      },
+      {
+        "index": 1,
+        "type": "SINGLE_COLOR",
+        "mode": 0,
+        "brightness": 0
+      }
+    ]
+  },
+  "steps": [
+    {
+      "requested": [
+        [
+          64,
+          0,
+          0
+        ],
+        [
+          64,
+          64,
+          64
+        ]
+      ],
+      "readback_matches": true,
+      "readback": {
+        "version": 72012,
+        "buffer_bytes": 6476,
+        "volatile_flags": 0,
+        "zones": [
+          {
+            "index": 0,
+            "type": "RGBW",
+            "mode": 0,
+            "rgbw_brightness": [
+              64,
+              0,
+              0,
+              0,
+              100
+            ]
+          },
+          {
+            "index": 1,
+            "type": "SINGLE_COLOR",
+            "mode": 0,
+            "brightness": 25
+          }
+        ]
+      }
+    },
+    {
+      "requested": [
+        [
+          0,
+          64,
+          0
+        ],
+        [
+          160,
+          160,
+          160
+        ]
+      ],
+      "readback_matches": true,
+      "readback": {
+        "version": 72012,
+        "buffer_bytes": 6476,
+        "volatile_flags": 0,
+        "zones": [
+          {
+            "index": 0,
+            "type": "RGBW",
+            "mode": 0,
+            "rgbw_brightness": [
+              0,
+              64,
+              0,
+              0,
+              100
+            ]
+          },
+          {
+            "index": 1,
+            "type": "SINGLE_COLOR",
+            "mode": 0,
+            "brightness": 63
+          }
+        ]
+      }
+    },
+    {
+      "requested": [
+        [
+          0,
+          0,
+          64
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "readback_matches": true,
+      "readback": {
+        "version": 72012,
+        "buffer_bytes": 6476,
+        "volatile_flags": 0,
+        "zones": [
+          {
+            "index": 0,
+            "type": "RGBW",
+            "mode": 0,
+            "rgbw_brightness": [
+              0,
+              0,
+              64,
+              0,
+              100
+            ]
+          },
+          {
+            "index": 1,
+            "type": "SINGLE_COLOR",
+            "mode": 0,
+            "brightness": 0
+          }
+        ]
+      }
+    }
+  ],
+  "restored_exact": true
+}

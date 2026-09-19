@@ -1,0 +1,187 @@
+[
+  {
+    "path": ".gitignore",
+    "bytes": 115,
+    "sha256": "09adfe2238e26ece9eee4f0323bd4f9acd9c497586910d141fa8c41b6181fdd9"
+  },
+  {
+    "path": "PROVENANCE.md",
+    "bytes": 2183,
+    "sha256": "18d88b152b4a148ece7088ec49c4e765246620983db4ae08f0c026915f2c86df"
+  },
+  {
+    "path": "README.md",
+    "bytes": 5461,
+    "sha256": "9f7a5ac4d99dad6766d824c3640793ae8d71867db0652ec745799c89bfcb4d81"
+  },
+  {
+    "path": "UPDATE-ELGATO.md",
+    "bytes": 3799,
+    "sha256": "53a92ec67e8386089e7e715ca594ff02cf91b5ec04a088f2d33736b9dd348c12"
+  },
+  {
+    "path": "bridge/API-NOTES.md",
+    "bytes": 9912,
+    "sha256": "c950e282b5b03a09c156e90dc5d2d049e68b5480ad119ea043ce23ac5fb187f5"
+  },
+  {
+    "path": "bridge/Arreter-StreamDeck.cmd",
+    "bytes": 111,
+    "sha256": "737d0a7d646a23d26552af53640657b01fd9c0797c0d9819c92bf19bf03ac92b"
+  },
+  {
+    "path": "bridge/DEMARRAGE.md",
+    "bytes": 4587,
+    "sha256": "ac626f39ab32db28d7ba4cdc1be1cf38d62832cd3270a0becc8a8b587fd907bd"
+  },
+  {
+    "path": "bridge/Demarrer-StreamDeck.cmd",
+    "bytes": 112,
+    "sha256": "84709c4535b87e16be4ac9650a5060255d225f45626659ed11068f75fdd2ca8b"
+  },
+  {
+    "path": "bridge/SIGNALRGB-INTEGRATION.md",
+    "bytes": 6613,
+    "sha256": "9afcca662a49a7b3cac30b0bb222c2a1c2908e52ad6f45d0bcc14262764d2a73"
+  },
+  {
+    "path": "bridge/SignalRGB_StreamDeck_Background.js",
+    "bytes": 6898,
+    "sha256": "682c0927cf7fa48082d8b03b8e5c5fcf32c854f7767ae814b9572c04c211d508"
+  },
+  {
+    "path": "bridge/SignalRGB_StreamDeck_Background.qml",
+    "bytes": 1189,
+    "sha256": "8c34e430cc28a981c8291a21c5d5fbeaf02bd3c3eff2b9c679d8275edfcadb62"
+  },
+  {
+    "path": "bridge/Start-Bridge.ps1",
+    "bytes": 6074,
+    "sha256": "64297793d7c29bc59082aaebd70691164a7e87140953a335da063ee985b5070a"
+  },
+  {
+    "path": "bridge/Stop-Bridge.ps1",
+    "bytes": 2112,
+    "sha256": "aaa891a9a50a83bf268fa894c428145f1c4ad62dd0bb85acb9544b23389d3a09"
+  },
+  {
+    "path": "bridge/Test-RuntimeDirectory.ps1",
+    "bytes": 1970,
+    "sha256": "26afb85b61726926e2c18e7278ae441debe30f03be035f44952c8d3579e0ed71"
+  },
+  {
+    "path": "bridge/background-core.js",
+    "bytes": 12721,
+    "sha256": "f308e12ac7733d4ad928fd56d75ecc669725f8f4e81b00a16690da152cd7c57e"
+  },
+  {
+    "path": "bridge/background_api.py",
+    "bytes": 19673,
+    "sha256": "5414cb1ec92d89e834644313433cdd6da553ca2a72fb3f5d9b40e1ddd157d588"
+  },
+  {
+    "path": "bridge/canvas_transport.py",
+    "bytes": 3414,
+    "sha256": "545114b32c1ee7650773ece6f85c443a1398386ef5f3f159c8412a85bd8e1cd3"
+  },
+  {
+    "path": "bridge/full-canvas-design.md",
+    "bytes": 6548,
+    "sha256": "2f53726fc1bdb04a6b53f4566db9d7be815b278f6542b110a78c6a249b1f748f"
+  },
+  {
+    "path": "bridge/install_signalrgb_background.py",
+    "bytes": 9795,
+    "sha256": "2380e14cf04eb91c2928f7539e9e4b9b6f3defdf2d068007972f26f678177028"
+  },
+  {
+    "path": "bridge/media_frames.py",
+    "bytes": 4933,
+    "sha256": "8b654eb82479c427646970a026abfae5b34f6a64ae7fe41613b203838bbfca19"
+  },
+  {
+    "path": "bridge/play_background.py",
+    "bytes": 3984,
+    "sha256": "17f3f7732448d0b6d0081ee0b6ec1ffd1a7daa49a4fd283a5048b4cedf4d0205"
+  },
+  {
+    "path": "bridge/requirements-test.txt",
+    "bytes": 31,
+    "sha256": "59bfc76bbf2ab24c8888a4c7f820fa3bbdae43c56dd582952a2f2623ae3ecfad"
+  },
+  {
+    "path": "bridge/requirements.txt",
+    "bytes": 30,
+    "sha256": "ab4a0b0e66118eb465f93b25417d0be5658e579f09a05a80f362a01bb77e0526"
+  },
+  {
+    "path": "bridge/test_background_api.py",
+    "bytes": 8094,
+    "sha256": "affddb66a19168070eb17e7bf41b3bf48621bf10011586806cdfa557cdc8dde6"
+  },
+  {
+    "path": "bridge/test_background_layout.cjs",
+    "bytes": 4150,
+    "sha256": "1aca3f664f7c65fb53846e65c7118c5c5a2b39446381cefb89a43d27169b4cb6"
+  },
+  {
+    "path": "bridge/test_background_pacing.cjs",
+    "bytes": 3469,
+    "sha256": "34032cfecde30567db5696d39e680071d30da9adfb8b141dce95aa1ba0333075"
+  },
+  {
+    "path": "bridge/test_canvas_transport.py",
+    "bytes": 3962,
+    "sha256": "5fa9dab4364c4e4121c894e62543eb39809f5f8e9d48fc1fffad85c2e51169b2"
+  },
+  {
+    "path": "bridge/test_install_signalrgb_background.py",
+    "bytes": 7360,
+    "sha256": "befcbc1fdd3a6f98f2a6c4de3ae2fd420af2c4521963a45db0726d3928a3978f"
+  },
+  {
+    "path": "bridge/test_media_frames.py",
+    "bytes": 1740,
+    "sha256": "2f216b3a4b7e9db7aabe939db9ad94f1ecf34b62362663b9e3c80f2487e082b1"
+  },
+  {
+    "path": "bridge/test_signalrgb_background.cjs",
+    "bytes": 9018,
+    "sha256": "4d8e5820285f646813167684a468930de904e1f34b6b875894df0efaae3bc28b"
+  },
+  {
+    "path": "research-official.md",
+    "bytes": 13499,
+    "sha256": "6804e36ab5b20cc138e0393626e756edf7a49718caf4b2747399a1b539f92e0a"
+  },
+  {
+    "path": "validation/relocation-tests.json",
+    "bytes": 920,
+    "sha256": "6442bed1ffcd730ea7a0fbace5ea20352796b464a37380c70e00d493a29f42f4"
+  },
+  {
+    "path": "validation/runtime-tests.json",
+    "bytes": 522,
+    "sha256": "c0a241974d65b6fefe11f148d2059531cc268064439ce566c98950501cc955bf"
+  },
+  {
+    "path": "validation/signalrgb-final-live.json",
+    "bytes": 1429,
+    "sha256": "a3b2db1c47cd214aaf19119cabc7590704a8dc16ca6d85d108c775316a921b08"
+  },
+  {
+    "path": "validation/signalrgb-final-steady.json",
+    "bytes": 1392,
+    "sha256": "607c629157cbe8bf14264187fe8365a66b229743726dff3fd9c0ebdbeec0662f"
+  },
+  {
+    "path": "validation/signalrgb-fullcanvas-live.json",
+    "bytes": 1277,
+    "sha256": "a3e4786699dd4540354355ecb5bac3413a402399ccdcd80a781660ed33aa06d9"
+  },
+  {
+    "path": "validation/tests-v0.2.json",
+    "bytes": 1060,
+    "sha256": "9ee7306543a580f27e5f554f5bf37b0943df0a554fddb7313a1cf467ee497fed"
+  }
+]

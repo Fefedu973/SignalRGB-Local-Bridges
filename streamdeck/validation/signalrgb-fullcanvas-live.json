@@ -1,0 +1,82 @@
+{
+  "ready": true,
+  "status": {
+    "ready": true,
+    "armed": true,
+    "restorationPending": false,
+    "errors": 0,
+    "compositions": 20709,
+    "paints": 20703,
+    "paintedKeys": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "queued": 1381,
+    "acknowledged": 1380,
+    "restores": 0,
+    "rejectedCandidates": 0,
+    "pending": 1381,
+    "uptimeMs": 92103,
+    "pacing": {
+      "maxFps": 30,
+      "dispatchIntervalMs": 5,
+      "windowSeconds": 5,
+      "received": 1383,
+      "coalesced": 2,
+      "queuedFps5s": 17,
+      "ackFps5s": 17,
+      "ackLatencyMs": {
+        "samples": 256,
+        "mean": 6.31,
+        "p50": 5,
+        "p95": 9,
+        "max": 88
+      },
+      "inputToAckMs": {
+        "samples": 256,
+        "mean": 7.22,
+        "p50": 6,
+        "p95": 11,
+        "max": 88
+      }
+    }
+  },
+  "accepted": 1383,
+  "canvas": {
+    "frames": 1383,
+    "rejected": 0,
+    "assembled": 1566,
+    "discarded": 0,
+    "decode_ms": 15.0,
+    "distinct_sample_colors_per_key": [
+      20,
+      19,
+      17,
+      19,
+      17,
+      20,
+      19,
+      17,
+      19,
+      17,
+      20,
+      19,
+      17,
+      19,
+      17
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "version": "0.2.0",
+  "validated_utc": "2026-09-19T17:36:57.313806+00:00",
+  "tested_from": "outputs/streamdeck-recherche/bridge",
+  "python": {
+    "api": 10,
+    "canvas_transport": 7,
+    "installer": 12,
+    "media": 3,
+    "total": 32,
+    "passed": true
+  },
+  "javascript": {
+    "signalrgb_client": 16,
+    "native_layout": 5,
+    "native_pacing": 6,
+    "total": 27,
+    "passed": true
+  },
+  "powershell_syntax": [
+    "Start-Bridge.ps1",
+    "Stop-Bridge.ps1"
+  ],
+  "total_tests": 59,
+  "new_hardware_tests_during_packaging": false,
+  "commands": [
+    "python -m unittest -v test_background_api.py test_canvas_transport.py test_install_signalrgb_background.py test_media_frames.py",
+    "node test_signalrgb_background.cjs",
+    "node test_background_layout.cjs",
+    "node test_background_pacing.cjs"
+  ],
+  "runtime_evidence": "signalrgb-fullcanvas-live.json",
+  "user_confirmation": "Oui, dégradés et fluidité corrects",
+  "privacy": "No live session token, raw capture, private configuration, virtual environment or backup included."
+}

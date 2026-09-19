@@ -1,0 +1,109 @@
+{
+  "utc": "2026-09-19T17:10:01.569447+00:00",
+  "health": {
+    "ready": true,
+    "status": {
+      "ready": true,
+      "armed": true,
+      "restorationPending": false,
+      "errors": 0,
+      "compositions": 169,
+      "paints": 167,
+      "paintedKeys": [
+        2,
+        3,
+        0,
+        1,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "queued": 12,
+      "acknowledged": 11,
+      "restores": 0,
+      "rejectedCandidates": 0,
+      "pending": 12,
+      "uptimeMs": 56472
+    },
+    "accepted": 411
+  },
+  "layout": {
+    "width": 480,
+    "height": 272,
+    "tileWidth": 72,
+    "tileHeight": 72,
+    "positions": [
+      [
+        11,
+        5
+      ],
+      [
+        108,
+        5
+      ],
+      [
+        205,
+        5
+      ],
+      [
+        302,
+        5
+      ],
+      [
+        399,
+        5
+      ],
+      [
+        11,
+        102
+      ],
+      [
+        108,
+        102
+      ],
+      [
+        205,
+        102
+      ],
+      [
+        302,
+        102
+      ],
+      [
+        399,
+        102
+      ],
+      [
+        11,
+        199
+      ],
+      [
+        108,
+        199
+      ],
+      [
+        205,
+        199
+      ],
+      [
+        302,
+        199
+      ],
+      [
+        399,
+        199
+      ]
+    ],
+    "columns": 5,
+    "rows": 3,
+    "source": "verified-mk2-fallback"
+  }
+}
