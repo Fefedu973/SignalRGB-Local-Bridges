@@ -83,7 +83,7 @@ try {
         $runner.Refresh()
         if ($runner.HasExited) { throw "Le pont a refuse le demarrage. Consultez $output et launcher-stderr.log dans $runtime" }
         $published = (Test-Path -LiteralPath $output) -and
-            ([string](Get-Content -LiteralPath $output -Raw)).Contains('"event": "signalrgb-client-installed"')
+            ((Get-Content -LiteralPath $output -Raw) -match '"event":\s*"signalrgb-client-installed"')
         if ((Test-Path -LiteralPath $session) -and $published) {
             Write-Host 'Pont demarre. SignalRGB pilote le fond ; les icones restent gerees par Stream Deck.'
             Write-Host 'Le premier rendu naturel peut prendre une minute. Utilisez Arreter-StreamDeck.cmd pour terminer.'
