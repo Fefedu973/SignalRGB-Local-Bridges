@@ -56,8 +56,8 @@
   },
   {
     "path": "bridge/Start-Bridge.ps1",
-    "bytes": 6065,
-    "sha256": "55a9e2d92cf63aed9e118939ada2b94594ad8aeb18b06d115abbb2d62822fdc4"
+    "bytes": 6121,
+    "sha256": "03c575876272cd113e6aaa4f04a94ff8508710e3808fd408f2505764131fdbe1"
   },
   {
     "path": "bridge/Stop-Bridge.ps1",

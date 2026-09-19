@@ -80,8 +80,8 @@ try {
         ConvertTo-Json | Set-Content -LiteralPath $state -Encoding UTF8
     for ($attempt = 0; $attempt -lt 40; $attempt++) {
         Start-Sleep -Milliseconds 250
-        $runner.Refresh()
-        if ($runner.HasExited) { throw "Le pont a refuse le demarrage. Consultez $output et launcher-stderr.log dans $runtime" }
+        $activeRunner = Get-Process -Id $runner.Id -ErrorAction SilentlyContinue
+        if (-not $activeRunner) { throw "Le pont a refuse le demarrage. Consultez $output et launcher-stderr.log dans $runtime" }
         $published = (Test-Path -LiteralPath $output) -and
             ((Get-Content -LiteralPath $output -Raw) -match '"event":\s*"signalrgb-client-installed"')
         if ((Test-Path -LiteralPath $session) -and $published) {
