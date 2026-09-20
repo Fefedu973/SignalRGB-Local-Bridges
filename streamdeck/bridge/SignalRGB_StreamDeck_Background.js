@@ -5,14 +5,15 @@ const BRIDGE_TOKEN = "__LOCAL_SESSION_TOKEN__";
 const BRIDGE_PORT = 47685;
 const BRIDGE_ID = "streamdeck-background-canvas-v2";
 // The native crop API requires x+width < Size().width (and the same for Y).
-const SOURCE_WIDTH = 320, SOURCE_HEIGHT = 200;
+const DEFAULT_CANVAS_WIDTH = 32;
+let sourceWidth = DEFAULT_CANVAS_WIDTH, sourceHeight = 20;
 const OUTPUT_WIDTH = 480, OUTPUT_HEIGHT = 272;
 const CHUNK_BYTES = 1024, MAX_JPEG_BYTES = 256 * 1024;
 export function Name() { return "Stream Deck Background"; }
-export function Version() { return "0.2.0"; }
+export function Version() { return "0.2.1"; }
 export function Type() { return "network"; }
 export function Publisher() { return "Fefedu973"; }
-export function Size() { return [SOURCE_WIDTH + 1, SOURCE_HEIGHT + 1]; }
+export function Size() { return [sourceWidth + 1, sourceHeight + 1]; }
 export function DefaultPosition() { return [0, 0]; }
 export function DefaultScale() { return 1; }
 export function RenderFrameDelay() { return 10; }
@@ -20,7 +21,8 @@ export function ControllableParameters() {
     return [
         {property:"LightingMode", group:"lighting", label:"Lighting Mode", type:"combobox", values:["Canvas","Forced"], default:"Canvas"},
         {property:"forcedColor", group:"lighting", label:"Forced Color", type:"color", default:"#0055aa"},
-        {property:"BackgroundFps", group:"lighting", label:"Background FPS", type:"number", min:1, max:30, step:1, default:20}
+        {property:"BackgroundFps", group:"lighting", label:"Background FPS", type:"number", min:1, max:30, step:1, default:20},
+        {property:"CanvasWidth", group:"lighting", label:"Canvas Width (layout units)", type:"number", min:16, max:320, step:16, default:DEFAULT_CANVAS_WIDTH}
     ];
 }
 let socket = null;
@@ -28,28 +30,45 @@ let lastSent = -Infinity;
 let frameSequence = 0;
 let lastProblem = "";
 let reportedImage = false;
+let waitForCanvasRefresh = false;
 function reportProblem(message) {
     if (message !== lastProblem) device.log(message, {toFile:true});
     lastProblem = message;
+}
+function configureCanvas() {
+    const requested = Number(typeof CanvasWidth === "undefined" ? DEFAULT_CANVAS_WIDTH : CanvasWidth);
+    sourceWidth = Number.isFinite(requested) ? Math.max(16, Math.min(320, Math.round(requested))) : DEFAULT_CANVAS_WIDTH;
+    sourceHeight = Math.round(sourceWidth * 5 / 8);
+    const names = [], positions = [];
+    for (let y=0; y<3; y++) for (let x=0; x<5; x++) {
+        names.push(`Key ${y*5+x+1} Background`);
+        positions.push([Math.round((47 + x*97) * sourceWidth / OUTPUT_WIDTH),
+                        Math.round((41 + y*97) * sourceHeight / OUTPUT_HEIGHT)]);
+    }
+    device.setSize(Size());
+    device.setControllableLeds(names, positions);
+    device.log(`Background bridge 0.2.1: Canvas source ${sourceWidth}x${sourceHeight}, layout ${sourceWidth+1}x${sourceHeight+1}, output ${OUTPUT_WIDTH}x${OUTPUT_HEIGHT}`, {toFile:true});
+}
+export function onCanvasWidthChanged() {
+    if (!socket) return; // Initialize reads the setting before opening the socket.
+    configureCanvas();
+    // Property callbacks run after the host samples its current Canvas. Wait
+    // one render so a larger crop cannot read the previous smaller framebuffer.
+    waitForCanvasRefresh = true;
+    lastSent = -Infinity;
+    reportedImage = false;
 }
 export function Initialize() {
     if (socket) { socket.close(); socket = null; }
     const controllerId = typeof controller !== "undefined" && controller ? controller.id : "missing";
     const requestedFps = typeof BackgroundFps === "undefined" ? "default20" : String(BackgroundFps);
-    device.log(`Background bridge 0.2.0: controller=${controllerId}; BackgroundFps=${requestedFps}; transport=compact-json`, {toFile:true});
+    device.log(`Background bridge 0.2.1: controller=${controllerId}; BackgroundFps=${requestedFps}; transport=compact-json`, {toFile:true});
     if (controllerId !== BRIDGE_ID) {
         device.log("Background bridge: old or unrelated controller inactive; rediscover the full Canvas controller", {toFile:true});
         return;
     }
-    const names = [], positions = [];
-    for (let y=0; y<3; y++) for (let x=0; x<5; x++) {
-        names.push(`Key ${y*5+x+1} Background`);
-        positions.push([Math.round((47 + x*97) * SOURCE_WIDTH / OUTPUT_WIDTH),
-                        Math.round((41 + y*97) * SOURCE_HEIGHT / OUTPUT_HEIGHT)]);
-    }
     device.setName("Stream Deck MK.2 Background");
-    device.setSize(Size());
-    device.setControllableLeds(names, positions);
+    configureCanvas();
     if (typeof device.setFrameRateTarget === "function") device.setFrameRateTarget(60);
     socket = udp.createSocket();
     // Never include a packet or its session token in error logs.
@@ -58,10 +77,11 @@ export function Initialize() {
     frameSequence = Math.max(0, Math.floor(Date.now()));
     lastProblem = "";
     reportedImage = false;
-    device.log("Background bridge 0.2.0: native Canvas 320x200 to 480x272; place the full Canvas controller at origin, scale 1", {toFile:true});
+    waitForCanvasRefresh = false;
 }
 export function Render() {
     if (!socket || BRIDGE_TOKEN === "__LOCAL_SESSION_TOKEN__") return;
+    if (waitForCanvasRefresh) { waitForCanvasRefresh = false; return; }
     const now = Date.now();
     const fps = Math.max(1, Math.min(30, Number(typeof BackgroundFps === "undefined" ? 20 : BackgroundFps) || 20));
     if (now - lastSent < 1000/fps) return;
@@ -81,7 +101,7 @@ export function Render() {
             return;
         }
         // One native crop/scale/encode for the whole image, no per-pixel JS calls.
-        const jpeg = device.getImageBuffer(0, 0, SOURCE_WIDTH, SOURCE_HEIGHT, {
+        const jpeg = device.getImageBuffer(0, 0, sourceWidth, sourceHeight, {
             outputWidth:OUTPUT_WIDTH, outputHeight:OUTPUT_HEIGHT,
             format:"JPEG", flipV:false, flipH:false
         });

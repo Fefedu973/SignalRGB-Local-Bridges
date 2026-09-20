@@ -34,7 +34,11 @@ Pour une session supervisée, utiliser `startup\Arreter-tout.cmd`, ou passer le 
 - [Mise à jour Elgato](UPDATE-ELGATO.md)
 - [Provenance et dépendances](PROVENANCE.md)
 
-La version 0.2 capture 320×200 pixels source, transmet un JPEG 480×272 et découpe les quinze tuiles 72×72. Le détail spatial est conservé, avec compression et redimensionnement. La cible par défaut est 20 images/s, réglable de 1 à 30 ; il ne s’agit pas d’une garantie de cadence optique.
+La version 0.2.1 propose **Canvas Width (layout units)** dans les réglages du périphérique SignalRGB : 32 par défaut, réglable de 16 à 320. La hauteur suit automatiquement le rapport 8:5. À 32, la capture source fait 32×20 et la boîte de layout 33×21, marge technique comprise, contre 321×201 auparavant. Cela réduit d'un facteur dix l'encombrement à échelle égale. Une largeur de 320 retrouve la résolution source précédente.
+
+Le pont transmet toujours un JPEG 480×272 et découpe les quinze tuiles 72×72. Les dégradés à l'intérieur des touches restent possibles ; réduire la largeur réduit aussi le nombre de pixels prélevés dans l'effet, puis agrandis pour l'affichage. La petite taille ne conserve donc pas le même niveau de détail source. La cible par défaut reste 20 images/s, réglable de 1 à 30 ; il ne s’agit pas d’une garantie de cadence optique.
+
+Le 20 septembre, le rechargement de la version 0.2.1 a confirmé une capture 32×20, quinze touches peintes et aucune erreur. L'utilisateur a confirmé pouvoir réduire le Stream Deck autour de 16×10 dans Layouts. Les 19 tests client et 12 tests installateur ont réussi ; voir [la validation de la taille compacte](validation/compact-layout-20260920.json).
 
 Une validation matérielle antérieure a confirmé visuellement les dégradés, la fluidité et la conservation des icônes. Le relevé [signalrgb-fullcanvas-live.json](validation/signalrgb-fullcanvas-live.json) comptait 1 383 images décodées, aucune erreur, les quinze touches et 17 acquittements/s dans sa dernière fenêtre de cinq secondes. Son délai entrée dans le moteur natif→acquittement était de 11 ms au 95e percentile, hors capture, transport, décodage et latence optique. Ces résultats concernent la version et le matériel indiqués ; ils ne valident pas une mise à jour Elgato.
 

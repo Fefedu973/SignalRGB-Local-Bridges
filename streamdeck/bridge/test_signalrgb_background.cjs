@@ -13,23 +13,45 @@ function fixture({token=true,port=47685}={}) {
  const clock={now:100000},sends=[],captures=[],sockets=[],logs=[],controllers=new Map(),events=[],geometry={},native={bytes:jpegBytes()};
  const device={setName(){},setSize(v){geometry.size=Array.from(v);},setControllableLeds(n,p){geometry.names=Array.from(n);geometry.positions=Array.from(p,v=>Array.from(v));},
   setFrameRateTarget(v){geometry.target=v;},color(){throw Error('Full Canvas must never sample individual pixels/keys');},
-  getImageBuffer(x,y,w,h,options){captures.push({x,y,w,h,options:JSON.parse(JSON.stringify(options))});assert(x+w<geometry.size[0]);assert(y+h<geometry.size[1]);return native.bytes;},log:v=>logs.push(v)};
+  getImageBuffer(x,y,w,h,options){captures.push({x,y,w,h,options:JSON.parse(JSON.stringify(options))});const bounds=native.sampledSize||geometry.size;assert(x+w<bounds[0]);assert(y+h<bounds[1]);return native.bytes;},log:v=>logs.push(v)};
  for(const key of ['write','read','send_report','get_report','control_transfer','bulk_transfer'])device[key]=()=>{throw Error('No USB');};
  const service={hasController:id=>controllers.has(id),addController(c){assert(!controllers.has(c.id));controllers.set(c.id,c);events.push('add');},updateController(c){assert(controllers.has(c.id));controllers.set(c.id,c);events.push('update');},announceController(c){assert(controllers.has(c.id));events.push('announce');}};
  const context=vm.createContext({device,service,controller:{id:ID},Date:{now:()=>clock.now},LightingMode:'Canvas',forcedColor:'#00ff80',BackgroundFps:20,udp:{createSocket(){
   const handlers={},socket={closed:false,handlers,on:(event,fn)=>handlers[event]=fn,write(msg,ip,port){assert(!socket.closed);assert.equal(typeof msg,'string');sends.push({msg:JSON.parse(msg),wire:msg,ip,port});},close(){socket.closed=true;}};sockets.push(socket);return socket;}}});
- vm.runInContext(source+';globalThis.api={Initialize,Render,Shutdown,Validate,DiscoveryService,Type,Size,DefaultScale,DefaultPosition,RenderFrameDelay,Version};',context);
+ vm.runInContext(source+';globalThis.api={Initialize,Render,Shutdown,Validate,DiscoveryService,Type,Size,DefaultScale,DefaultPosition,RenderFrameDelay,Version,onCanvasWidthChanged,ControllableParameters};',context);
  return {api:context.api,context,clock,sends,captures,sockets,logs,events,controllers,geometry,native};
 }
 check('single native full-source crop reconstructs all JPEG bytes from bounded datagrams',()=>{
- const s=fixture();s.api.Initialize();s.api.Render();assert.equal(s.api.Type(),'network');assert.equal(s.api.Version(),'0.2.0');assert(s.api.Validate());
- assert.deepEqual(s.geometry.size,[321,201]);assert.equal(s.api.DefaultScale(),1);assert.equal(s.api.RenderFrameDelay(),10);assert.equal(s.captures.length,1);
- assert.deepEqual(s.captures[0],{x:0,y:0,w:320,h:200,options:{outputWidth:480,outputHeight:272,format:'JPEG',flipV:false,flipH:false}});
+ const s=fixture();s.api.Initialize();s.api.Render();assert.equal(s.api.Type(),'network');assert.equal(s.api.Version(),'0.2.1');assert(s.api.Validate());
+ assert.deepEqual(s.geometry.size,[33,21]);assert.equal(s.api.DefaultScale(),1);assert.equal(s.api.RenderFrameDelay(),10);assert.equal(s.captures.length,1);
+ assert.deepEqual(s.captures[0],{x:0,y:0,w:32,h:20,options:{outputWidth:480,outputHeight:272,format:'JPEG',flipV:false,flipH:false}});
  assert.equal(s.sends.length,10);assert.deepEqual(s.sends.flatMap(v=>v.msg.data),s.native.bytes);
  s.sends.forEach(({msg,ip,port},i)=>{assert.equal(msg.kind,'canvas-jpeg');assert.equal(msg.part,i);assert.equal(msg.total,10);assert.equal(msg.frame,s.sends[0].msg.frame);assert.equal(msg.lease_ms,2000);assert(msg.data.length<=1024);assert.equal(ip,'127.0.0.1');assert.equal(port,47685);assert(!('colors'in msg));assert(Buffer.byteLength(JSON.stringify(msg))<5000);});
 });
-check('layout markers follow15 native tile centers without shrinking capture',()=>{
- const s=fixture();s.api.Initialize();assert.equal(s.geometry.names.length,15);assert.deepEqual(s.geometry.positions[0],[31,30]);assert.deepEqual(s.geometry.positions[14],[290,173]);assert.equal(s.geometry.target,60);assert.deepEqual(Array.from(s.api.DefaultPosition()),[0,0]);
+check('layout markers follow15 native tile centers at compact size',()=>{
+ const s=fixture();s.api.Initialize();assert.equal(s.geometry.names.length,15);assert.deepEqual(s.geometry.positions[0],[3,3]);assert.deepEqual(s.geometry.positions[14],[29,17]);assert.equal(s.geometry.target,60);assert.deepEqual(Array.from(s.api.DefaultPosition()),[0,0]);
+});
+check('configurable source spans small layouts through original detail, retaining output dimensions',()=>{
+ for(const [value,w,h] of [[16,16,10],[320,320,200],['48',48,30],[-50,16,10],[999,320,200],['invalid',32,20],[Infinity,32,20],[NaN,32,20]]){
+  const s=fixture();s.context.CanvasWidth=value;s.api.onCanvasWidthChanged();assert.equal(s.sockets.length,0);
+  s.api.Initialize();s.api.Render();assert.deepEqual(s.geometry.size,[w+1,h+1]);assert.equal(s.captures[0].w,w);assert.equal(s.captures[0].h,h);
+  assert.equal(s.captures[0].options.outputWidth,480);assert.equal(s.captures[0].options.outputHeight,272);
+  assert.equal(s.geometry.positions.length,15);assert(s.geometry.positions.every(([x,y])=>x>=0&&x<w&&y>=0&&y<h));
+  if(w===320){assert.deepEqual(s.geometry.positions[0],[31,30]);assert.deepEqual(s.geometry.positions[14],[290,173]);}
+ }
+});
+check('resize waits for a fresh host Canvas and the latest width wins',()=>{
+ const s=fixture();s.api.Initialize();s.native.sampledSize=s.geometry.size.slice();s.api.Render();
+ s.clock.now+=50;s.context.CanvasWidth=320;s.api.onCanvasWidthChanged();s.api.Render();assert.equal(s.captures.length,1);
+ s.native.sampledSize=s.geometry.size.slice();s.api.Render();assert.equal(s.captures.length,2);assert.equal(s.captures[1].w,320);
+ s.context.CanvasWidth=64;s.api.onCanvasWidthChanged();s.context.CanvasWidth=16;s.api.onCanvasWidthChanged();
+ s.api.Render();assert.equal(s.captures.length,2);s.native.sampledSize=s.geometry.size.slice();s.api.Render();assert.equal(s.captures.length,3);assert.equal(s.captures[2].w,16);
+ s.api.Shutdown();s.context.CanvasWidth=320;s.api.onCanvasWidthChanged();assert.deepEqual(s.geometry.size,[17,11]);
+});
+check('Canvas width setting has a compact default and preserves existing controls',()=>{
+ const s=fixture(),params=s.api.ControllableParameters(),width=params.find(p=>p.property==='CanvasWidth');
+ assert.equal(width.default,32);assert.equal(width.min,16);assert.equal(width.max,320);assert.equal(width.type,'number');
+ assert.deepEqual(Array.from(params,p=>p.property),['LightingMode','forcedColor','BackgroundFps','CanvasWidth']);
 });
 check('20fps pacing skips capture before50ms and frame IDs increase',()=>{
  const s=fixture();s.api.Initialize();s.api.Render();s.clock.now+=49;s.api.Render();assert.equal(s.captures.length,1);s.clock.now++;s.api.Render();assert.equal(s.captures.length,2);assert(s.sends[10].msg.frame>s.sends[0].msg.frame);

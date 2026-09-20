@@ -11,8 +11,8 @@
   },
   {
     "path": "README.md",
-    "bytes": 5461,
-    "sha256": "9f7a5ac4d99dad6766d824c3640793ae8d71867db0652ec745799c89bfcb4d81"
+    "bytes": 6413,
+    "sha256": "06bf2e698bd6b3244bcbf2efd65b610ad4e2a061735d3885239bdba453e9626e"
   },
   {
     "path": "UPDATE-ELGATO.md",
@@ -41,13 +41,13 @@
   },
   {
     "path": "bridge/SIGNALRGB-INTEGRATION.md",
-    "bytes": 6613,
-    "sha256": "9afcca662a49a7b3cac30b0bb222c2a1c2908e52ad6f45d0bcc14262764d2a73"
+    "bytes": 7923,
+    "sha256": "d39d4831f4a724c47afe38a430adc42a3b1fd4077f52788b1a3fce5806520e44"
   },
   {
     "path": "bridge/SignalRGB_StreamDeck_Background.js",
-    "bytes": 6898,
-    "sha256": "682c0927cf7fa48082d8b03b8e5c5fcf32c854f7767ae814b9572c04c211d508"
+    "bytes": 8006,
+    "sha256": "9247b0f5fdf60e0154960cbcf6dd62774fa8b37e4646c4256c08f314e479b64c"
   },
   {
     "path": "bridge/SignalRGB_StreamDeck_Background.qml",
@@ -86,8 +86,8 @@
   },
   {
     "path": "bridge/full-canvas-design.md",
-    "bytes": 6548,
-    "sha256": "2f53726fc1bdb04a6b53f4566db9d7be815b278f6542b110a78c6a249b1f748f"
+    "bytes": 7061,
+    "sha256": "6baabc21ae1672810cad2a2f0dafcf5aaec0831048ce04d44084b3d24d852d43"
   },
   {
     "path": "bridge/install_signalrgb_background.py",
@@ -146,13 +146,18 @@
   },
   {
     "path": "bridge/test_signalrgb_background.cjs",
-    "bytes": 9018,
-    "sha256": "4d8e5820285f646813167684a468930de904e1f34b6b875894df0efaae3bc28b"
+    "bytes": 11201,
+    "sha256": "81601fa74ad548bd5a2926f1e0496178c871e7f54e266f74ddf45aa471a29767"
   },
   {
     "path": "research-official.md",
     "bytes": 13499,
     "sha256": "6804e36ab5b20cc138e0393626e756edf7a49718caf4b2747399a1b539f92e0a"
+  },
+  {
+    "path": "validation/compact-layout-20260920.json",
+    "bytes": 1451,
+    "sha256": "2cadd528f56b3b69160a9de84ba67d61cceb248d7e94d43439691b6afc57dcaf"
   },
   {
     "path": "validation/relocation-tests.json",

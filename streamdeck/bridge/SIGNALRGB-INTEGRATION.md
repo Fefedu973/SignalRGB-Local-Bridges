@@ -1,6 +1,6 @@
 # SignalRGB : Canvas complet vers le fond Stream Deck
 
-Le client version **0.2.0** extrait une image du Canvas actif en un seul appel natif `device.getImageBuffer`. Il couvre 320×200 pixels source, produit un JPEG de 480×272, puis le pont découpe les quinze tuiles 72×72. Les détails restent visibles à l'intérieur de chaque touche, sous les icônes et textes d'Elgato. Le mode Forced reste une couleur uniforme.
+Le client version **0.2.1** extrait une image du Canvas actif en un seul appel natif `device.getImageBuffer`. Il couvre 32×20 pixels source par défaut, produit un JPEG de 480×272, puis le pont découpe les quinze tuiles 72×72. Le réglage **Canvas Width (layout units)** permet de choisir une largeur de 16 à 320, la hauteur suivant le rapport 8:5. Une largeur de 320 retrouve les 320×200 pixels source de la version 0.2.0. Le mode Forced reste une couleur uniforme.
 
 Ce périphérique est réseau : aucun VID/PID, aucune ouverture HID, aucun appel USB. Son unique module est `@SignalRGB/udp` et son destinataire est `127.0.0.1`. L'ancien plugin USB qui remplace les images complètes des touches doit rester désactivé.
 
@@ -12,7 +12,11 @@ Chaque touche contient 17 à 20 couleurs distinctes parmi vingt pixels échantil
 
 ## Géométrie et migration
 
-Le contrôleur porte l'identité **`streamdeck-background-canvas-v2`**. Ses défauts sont une position `[0,0]`, une échelle `1` et une taille `[321,201]`. La marge d'un pixel respecte la borne stricte de l'API native, qui exige x+largeur < taille et y+hauteur < taille. La capture utile est `[0,0,320,200]`, redimensionnée en 480×272, sans retournement horizontal ou vertical.
+Le contrôleur conserve l'identité **`streamdeck-background-canvas-v2`**. Ses défauts sont une position `[0,0]`, une échelle `1` et une taille `[33,21]`. La marge d'un pixel respecte la borne stricte de l'API native, qui exige x+largeur < taille et y+hauteur < taille. La capture utile par défaut est `[0,0,32,20]`, redimensionnée en 480×272, sans retournement horizontal ou vertical. Les positions et échelles déjà enregistrées restent gérées par SignalRGB.
+
+Dans **Appareils → Stream Deck MK.2 Background**, régler **Canvas Width (layout units)** pour modifier la taille de base avant le redimensionnement dans Layouts. À 32, l'encombrement est dix fois plus petit qu'à 320 : avec la limite d'échelle de 0,5 observée par l'utilisateur, cela correspond à environ 16×10 au lieu de 160×100. La largeur minimale de 16 permet de descendre encore. Le nombre exact affiché peut inclure l'arrondi et la marge d'un pixel ; le minimum de l'interface n'est pas une propriété modifiée par le plugin.
+
+Ce réglage réduit aussi la résolution de prélèvement : 32×20 fournit 640 pixels source, contre 64 000 à 320×200. La sortie 480×272 est un agrandissement, pas une capture haute résolution supplémentaire. Les dégradés restent spatiaux, mais les petits détails de l'effet sont moins précis. `onCanvasWidthChanged` recalcule les quinze repères et ignore un Render pour attendre que SignalRGB ait renouvelé son tampon à la nouvelle taille.
 
 Les quinze positions LED affichées dans SignalRGB suivent les centres physiques des touches, convertis en coordonnées source. Elles ne déterminent pas la résolution de l'image capturée. Une image JPEG redimensionnée conserve le détail spatial mais n'est pas une copie sans perte des pixels d'origine.
 
@@ -49,7 +53,7 @@ node test_background_pacing.cjs background-core.js
 python -m unittest -v test_background_api.py test_canvas_transport.py test_install_signalrgb_background.py test_media_frames.py
 ```
 
-Les seize tests du client couvrent l'extraction unique, la fragmentation compacte et ses limites, la cadence, le mode Forced, la rotation du socket, l'identité, les erreurs et l'absence d'accès HID/USB. Les douze tests d'installation couvrent notamment QML, jetons, sauvegardes, chemins OneDrive et conservation d'une modification concurrente. Les tests du récepteur utilisent de vrais JPEG avec plusieurs couleurs dans une touche. Les E/S matérielles sont simulées.
+Les dix-neuf tests du client couvrent l'extraction unique, le redimensionnement après renouvellement du tampon hôte, les bornes et valeurs invalides de Canvas Width, la fragmentation compacte et ses limites, la cadence, le mode Forced, la rotation du socket, l'identité, les erreurs et l'absence d'accès HID/USB. Les douze tests d'installation couvrent notamment QML, jetons, sauvegardes, chemins OneDrive et conservation d'une modification concurrente. Les tests du récepteur utilisent de vrais JPEG avec plusieurs couleurs dans une touche. Les E/S matérielles sont simulées.
 
 ## Sources
 

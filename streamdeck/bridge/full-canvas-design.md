@@ -2,6 +2,8 @@
 
 Le client `SignalRGB_StreamDeck_Background.js` capture une image du Canvas, au lieu de quinze couleurs uniformes. Il utilise le récepteur `canvas_transport.py` et l'API locale. La validation réelle coordonnée par l'agent principal a réussi : l'utilisateur a confirmé les dégradés et la fluidité ; le relevé final compte 1 383 images, quinze touches avec du détail spatial, 17 acquittements/s pour une cible de 20 et aucune erreur. Les étapes statiques et tests simulés détaillés ci-dessous restent distincts de cette validation matérielle.
 
+**Évolution 0.2.1, 20 septembre 2026 :** le document ci-dessous conserve l'analyse et les mesures historiques en 320×200. La largeur source est désormais réglable de 16 à 320 via `CanvasWidth`, avec 32×20 par défaut et une boîte 33×21. La sortie JPEG reste 480×272, mais le nombre d'échantillons source diminue lorsque le layout est compact. Voir [SIGNALRGB-INTEGRATION.md](SIGNALRGB-INTEGRATION.md) pour le réglage actuel et ses limites. L'identité, le transport et le hook Elgato ne changent pas.
+
 ## API native vérifiée
 
 Le fichier historique utilisateur `%USERPROFILE%\OneDrive\Documents\WhirlwindFX\Plugins\Streamdeck-0x0080.js`, ligne 176, utilisait déjà `device.getImageBuffer(x,y,width,height,options)` en mode Canvas. Les options comprenaient `outputWidth`, `outputHeight`, `flipV`, `flipH`. Le plugin Corsair Nexus installé cite `format:"BMP"` dans sa fonction `colorgrabber` (non appelée par son Render actuel) : cet exemple établit une signature, pas son fonctionnement matériel présent.
